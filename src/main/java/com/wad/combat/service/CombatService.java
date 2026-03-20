@@ -91,7 +91,7 @@ public class CombatService {
                 attacker.getId(),
                 attacker.getName(),
                 chosenSkill.getNum(),
-                attacker.getName() + " uses Skill " + chosenSkill.getNum() + " on " + target.getName(),
+                attacker.getName() + " uses " + (chosenSkill.getName() != null ? chosenSkill.getName() : "Skill " + chosenSkill.getNum()) + " on " + target.getName(),
                 damage,
                 (target == m1) ? hp1 : hp2
             ));
@@ -134,10 +134,11 @@ public class CombatService {
             };
             statValue = statValue * (skill.getRatio().getPercent() / 100.0);
         }
-        
-        int totalDamage = (int) (skill.getDmg() + statValue);
-        int finalDamage = Math.max(1, totalDamage - target.getDef());
-        return finalDamage;
+
+        double baseDamage = skill.getDmg() + statValue;
+        double levelBonus = 1.0 + Math.max(0, skill.getLevel() - 1) * 0.10;
+        int totalDamage = (int) (baseDamage * levelBonus);
+        return Math.max(1, totalDamage - target.getDef());
     }
 
     public List<CombatLog> getAllCombats() {

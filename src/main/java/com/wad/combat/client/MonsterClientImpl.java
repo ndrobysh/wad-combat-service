@@ -28,7 +28,7 @@ public class MonsterClientImpl implements MonsterClient {
 
         try {
             ResponseEntity<MonsterDTO> response = restTemplate.exchange(
-                    monsterServiceUrl + "/api/monster/" + id,
+                    monsterServiceUrl + "/api/monster/internal/" + id,
                     HttpMethod.GET,
                     entity,
                     MonsterDTO.class

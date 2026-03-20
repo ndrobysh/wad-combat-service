@@ -1,6 +1,7 @@
 package com.wad.combat.dto;
 
 public class SkillDTO {
+    private String name;
     private int num;
     private int dmg;
     private RatioDTO ratio;
@@ -22,4 +23,6 @@ public class SkillDTO {
     public void setLevel(int level) { this.level = level; }
     public int getLvlMax() { return lvlMax; }
     public void setLvlMax(int lvlMax) { this.lvlMax = lvlMax; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 }
