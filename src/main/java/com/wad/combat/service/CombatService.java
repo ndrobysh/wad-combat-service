@@ -27,7 +27,7 @@ public class CombatService {
         MonsterDTO m2 = monsterClient.getMonster(monster2Id, token);
 
         if (m1 == null || m2 == null) {
-            throw new RuntimeException("One or both monsters not found");
+            throw new RuntimeException("Un des deux monstres n'existe pas");
         }
 
         List<TurnLog> logs = new ArrayList<>();
@@ -91,7 +91,7 @@ public class CombatService {
                 attacker.getId(),
                 attacker.getName(),
                 chosenSkill.getNum(),
-                attacker.getName() + " uses " + (chosenSkill.getName() != null ? chosenSkill.getName() : "Skill " + chosenSkill.getNum()) + " on " + target.getName(),
+                attacker.getName() + " utilise " + (chosenSkill.getName() != null ? chosenSkill.getName() : "Skill " + chosenSkill.getNum()) + " sur " + target.getName(),
                 damage,
                 (target == m1) ? hp1 : hp2
             ));
@@ -121,6 +121,7 @@ public class CombatService {
         return combatLogRepository.save(combatLog);
     }
 
+    // formule inspiree de Pokemon mais simplifiee
     private int calculateDamage(MonsterDTO attacker, MonsterDTO target, SkillDTO skill) {
         double statValue = 0;
         if (skill.getRatio() != null) {
