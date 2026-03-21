@@ -121,11 +121,7 @@ class CombatServiceTest {
 
         CombatLog result = combatService.simulateCombat("m1", "m2", "token");
 
-        // Turn 1: M1 acts. Skills sorted [2, 1]. CD of 2 is 0. Uses Skill 2.
-        // Turn 2: M2 acts.
-        // Turn 3: M1 acts. CD of 2 was 2 at end of T1. At start of T3 it's decremented to 1. Uses Skill 1.
-        // Turn 4: M2 acts.
-        // Turn 5: M1 acts. CD of 2 was 1 at end of T3. At start of T5 it's decremented to 0. Uses Skill 2.
+        // skill 2 a CD=2 donc M1 alterne entre skill 2 et skill 1
 
         int m1TurnCount = 0;
         for (var log : result.getLogs()) {
