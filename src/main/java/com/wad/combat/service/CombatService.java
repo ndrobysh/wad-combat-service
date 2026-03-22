@@ -26,8 +26,11 @@ public class CombatService {
         MonsterDTO m1 = monsterClient.getMonster(monster1Id, token);
         MonsterDTO m2 = monsterClient.getMonster(monster2Id, token);
 
-        if (m1 == null || m2 == null) {
-            throw new RuntimeException("Un des deux monstres n'existe pas");
+        if (m1 == null) {
+            throw new RuntimeException("Le monstre attaquant n'existe pas");
+        }
+        if (m2 == null) {
+            throw new RuntimeException("Le monstre defenseur n'existe pas");
         }
 
         List<TurnLog> logs = new ArrayList<>();
