@@ -22,7 +22,7 @@ public class CombatService {
         this.combatLogRepository = combatLogRepository;
     }
 
-    public CombatLog simulateCombat(String monster1Id, String monster2Id, String token) {
+    public CombatLog fight(String monster1Id, String monster2Id, String token) {
         MonsterDTO m1 = monsterClient.getMonster(monster1Id, token);
         MonsterDTO m2 = monsterClient.getMonster(monster2Id, token);
 
@@ -142,11 +142,11 @@ public class CombatService {
         return Math.max(1, totalDamage - target.getDef());
     }
 
-    public List<CombatLog> getAllCombats() {
+    public List<CombatLog> history() {
         return combatLogRepository.findAll();
     }
 
-    public CombatLog getCombatById(String id) {
+    public CombatLog getLog(String id) {
         return combatLogRepository.findById(id).orElse(null);
     }
 }

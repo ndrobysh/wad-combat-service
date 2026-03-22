@@ -27,13 +27,13 @@ public class CombatController {
 
     @PostMapping("/simulate")
     @Operation(summary = "Simuler un combat entre deux monstres")
-    public ResponseEntity<CombatResponse> simulateCombat(
+    public ResponseEntity<CombatResponse> fight(
             @RequestHeader("Authorization") String token,
             @RequestBody CombatRequest request) {
-        
+
         authService.validateToken(token);
-        
-        CombatLog log = combatService.simulateCombat(request.getMonster1Id(), request.getMonster2Id(), token);
+
+        CombatLog log = combatService.fight(request.getMonster1Id(), request.getMonster2Id(), token);
         
         return ResponseEntity.ok(CombatResponse.builder()
                 .combatId(log.getId())
@@ -45,18 +45,18 @@ public class CombatController {
 
     @GetMapping("/history")
     @Operation(summary = "Récupérer l'historique de tous les combats")
-    public ResponseEntity<List<CombatLog>> getHistory(@RequestHeader("Authorization") String token) {
+    public ResponseEntity<List<CombatLog>> history(@RequestHeader("Authorization") String token) {
         authService.validateToken(token);
-        return ResponseEntity.ok(combatService.getAllCombats());
+        return ResponseEntity.ok(combatService.history());
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Récupérer les logs d'un combat spécifique (rediffusion)")
-    public ResponseEntity<CombatLog> getCombatLog(
+    public ResponseEntity<CombatLog> getLog(
             @RequestHeader("Authorization") String token,
             @PathVariable String id) {
         authService.validateToken(token);
-        CombatLog log = combatService.getCombatById(id);
+        CombatLog log = combatService.getLog(id);
         if (log == null) {
             return ResponseEntity.notFound().build();
         }
