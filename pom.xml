@@ -17,7 +17,6 @@
     <packaging>jar</packaging>
 
     <name>Combat Service</name>
-    <description>API de simulation de combat (BONUS)</description>
 
     <properties>
         <java.version>21</java.version>
